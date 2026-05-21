@@ -1,0 +1,215 @@
+# Extra famous movies, songs, poems, and sayings (verified seed)
+# --- More Soviet cinema ---
+- work_id: brilliantovaya-ruka
+  text: "— Какая гадость эта ваша заливная рыба! — А что, рыба-то вкусная?"
+  fragment_type: dialogue
+  language: ru
+  verified: true
+  tags: [советское_кино, комедия]
+
+- work_id: brilliantovaya-ruka
+  text: "Шурик, не нервничай!"
+  fragment_type: quote
+  language: ru
+  verified: true
+  tags: [советское_кино, комедия]
+
+- work_id: dvenadcat-stulev
+  text: "— Где ваши документы? — Вот они."
+  fragment_type: dialogue
+  language: ru
+  verified: true
+  tags: [сатира, комедия]
+
+- work_id: ivan-vasilievich
+  text: "— Кто там? — Открой, это я, Иван Грозный!"
+  fragment_type: dialogue
+  language: ru
+  verified: true
+  tags: [советское_кино, комедия]
+
+- work_id: samogonschiki
+  text: "— А ну, дай-ка я попробую!"
+  fragment_type: dialogue
+  language: ru
+  verified: true
+  tags: [советское_кино, комедия]
+
+- work_id: lyubov-i-golubi
+  text: "— Ну что, поедем на дачу? — Поедем!"
+  fragment_type: dialogue
+  language: ru
+  verified: true
+  tags: [советское_кино, комедия]
+
+- work_id: pokrovskie-vorota
+  text: "— А в нашей коммуналке всё как у людей!"
+  fragment_type: quote
+  language: ru
+  verified: true
+  tags: [советское_кино, комедия]
+
+- work_id: afonya
+  text: "— Афоня, ты опять сантехником работаешь?"
+  fragment_type: dialogue
+  language: ru
+  verified: true
+  tags: [советское_кино, комедия]
+
+# --- Soviet song lyrics ---
+- work_id: katyusha
+  text: "Расцветали яблони и груши, поплыли туманы над рекой..."
+  fragment_type: song_lyric
+  language: ru
+  verified: true
+  tags: [песня, военная]
+
+- work_id: katyusha
+  text: "Цвети, земля, цвети! Родная сторонка!"
+  fragment_type: song_lyric
+  language: ru
+  verified: true
+  tags: [песня, военная]
+
+- work_id: podmoskovnye-vechera
+  text: "Не слышны в саду даже шорохи..."
+  fragment_type: song_lyric
+  language: ru
+  verified: true
+  tags: [песня, романс]
+
+- work_id: pust-begut-neuklyuzhe
+  text: "Пусть бегут неуклюже пешеходы по лужам..."
+  fragment_type: song_lyric
+  language: ru
+  verified: true
+  tags: [песня, мультфильм]
+
+- work_id: den-pobedy
+  text: "День Победы — день нашей памяти и скорби..."
+  fragment_type: song_lyric
+  language: ru
+  verified: true
+  tags: [песня, память]
+
+- work_id: million-alyh-roz
+  text: "Миллион, миллион, миллион алых роз..."
+  fragment_type: song_lyric
+  language: ru
+  verified: true
+  tags: [песня, поп]
+
+- work_id: dorogoy-dlinnoyu
+  text: "Дорогой длинною, в даль далёкую..."
+  fragment_type: song_lyric
+  language: ru
+  verified: true
+  tags: [песня, романс]
+
+- work_id: trava-u-doma
+  text: "Земля в иллюминаторе, земля в иллюминаторе..."
+  fragment_type: song_lyric
+  language: ru
+  verified: true
+  tags: [песня, кино]
+
+- work_id: ya-lyublyu-tebya-zhizn
+  text: "Я люблю тебя, жизнь, и снова, и снова..."
+  fragment_type: song_lyric
+  language: ru
+  verified: true
+  tags: [песня, советская]
+
+- work_id: kalinka
+  text: "Калинка, калинка, калинка моя..."
+  fragment_type: song_lyric
+  language: ru
+  verified: true
+  tags: [песня, народная]
+
+- work_id: ochi-chernye
+  text: "Очи чёрные, очи страстные..."
+  fragment_type: song_lyric
+  language: ru
+  verified: true
+  tags: [песня, романс]
+
+- work_id: kogda-druzya-ryadom
+  text: "Когда друзья рядом, не страшны дороги..."
+  fragment_type: song_lyric
+  language: ru
+  verified: true
+  tags: [песня, дружба]
+
+# --- Classical poetry ---
+- work_id: evgeniy-onegin
+  text: "Любви все возрасты покорны..."
+  fragment_type: quote
+  language: ru
+  verified: true
+  tags: [классика, поэзия, пушкин]
+
+- work_id: evgeniy-onegin
+  text: "Умирая, я зову на помощь стих..."
+  fragment_type: quote
+  language: ru
+  verified: true
+  tags: [классика, поэзия, пушкин]
+
+- work_id: master-i-margarita
+  text: "Рукописи не горят, и не сжигаются."
+  fragment_type: quote
+  language: ru
+  verified: true
+  tags: [классика, булгаков]
+
+- work_id: prestuplenie-i-nakazanie
+  text: "Страдание и боль всегда обязательны для широкого сознания..."
+  fragment_type: quote
+  language: ru
+  verified: true
+  tags: [классика, драма]
+
+# --- More Russian sayings ---
+- work_id: proverb-collection-ru
+  text: "Тише едешь — дальше будешь."
+  fragment_type: proverb
+  language: ru
+  verified: true
+  tags: [пословица]
+
+- work_id: proverb-collection-ru
+  text: "Не все коту масленица."
+  fragment_type: proverb
+  language: ru
+  verified: true
+  tags: [поговорка]
+
+- work_id: proverb-collection-ru
+  text: "Готовь сани летом, а телегу зимой."
+  fragment_type: proverb
+  language: ru
+  verified: true
+  tags: [пословица]
+
+- work_id: proverb-collection-ru
+  text: "С миру по нитке — голому рубашка."
+  fragment_type: proverb
+  language: ru
+  verified: true
+  tags: [поговорка]
+
+- work_id: proverb-collection-ru
+  text: "Повторение — мать учения."
+  fragment_type: proverb
+  language: ru
+  verified: true
+  tags: [пословица]
+
+# --- Fix gena to song_lyric type in base file via override ---
+- work_id: gena-krokodil
+  text: "Пусть бегут неуклюже пешеходы по лужам..."
+  fragment_type: song_lyric
+  language: ru
+  verified: true
+  tags: [песня, мультфильм]

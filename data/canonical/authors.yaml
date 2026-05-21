@@ -1,0 +1,43 @@
+- id: gaidai
+  name: Леонид Гайдай
+  roles: [director]
+
+- id: ryazanov
+  name: Эльдар Рязанов
+  roles: [director]
+
+- id: pushkin
+  name: Александр Пушкин
+  roles: [author]
+
+- id: bulgakov
+  name: Михаил Булгаков
+  roles: [author]
+
+- id: dostoevsky
+  name: Фёдор Достоевский
+  roles: [author]
+
+- id: exupery
+  name: Антуан де Сент-Экзюпери
+  roles: [author]
+
+- id: fedya
+  name: Федя
+  roles: [character]
+
+- id: shurik
+  name: Шурик
+  roles: [character]
+
+- id: gena
+  name: Крокодил Гена
+  roles: [character]
+
+- id: cheburashka-char
+  name: Чебурашка
+  roles: [character]
+
+- id: volk
+  name: Волк
+  roles: [character]

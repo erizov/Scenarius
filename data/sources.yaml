@@ -1,0 +1,310 @@
+# Ingest source registry — order matters for ingest-all
+citaty_info:
+  base_url: https://citaty.info
+  # Famous works scraped first (from canonical works + list pages)
+  list_pages:
+    - path: /movie/list
+      work_kind: film
+      tier: 1
+      language: ru
+    - path: /animation/list
+      work_kind: cartoon
+      tier: 1
+      language: ru
+    - path: /series/list
+      work_kind: film
+      tier: 1
+      language: ru
+    - path: /book/list
+      work_kind: book
+      tier: 1
+      language: ru
+  sections:
+    - path: /movie
+      work_kind: film
+      tier: 1
+      language: ru
+    - path: /cartoon
+      work_kind: cartoon
+      tier: 1
+      language: ru
+    - path: /animation
+      work_kind: cartoon
+      tier: 1
+      language: ru
+    - path: /series
+      work_kind: film
+      tier: 1
+      language: ru
+    - path: /book
+      work_kind: book
+      tier: 1
+      language: ru
+    - path: /man/aphorisms
+      work_kind: other
+      fragment_type: aphorism
+      tier: 1
+      language: ru
+    - path: /topic/poslovicy
+      work_kind: proverb_collection
+      fragment_type: proverb
+      tier: 1
+      language: ru
+    - path: /topic/pogovorki
+      work_kind: proverb_collection
+      fragment_type: proverb
+      tier: 1
+      language: ru
+    - path: /topic/zhizn
+      work_kind: other
+      fragment_type: aphorism
+      tier: 1
+      language: ru
+    - path: /category/smeshnye-citaty
+      work_kind: other
+      fragment_type: quote
+      tier: 1
+      language: ru
+    - path: /category/zhiznennye-citaty
+      work_kind: other
+      fragment_type: aphorism
+      tier: 1
+      language: ru
+    - path: /selection/100-luchshih-citat-iz-filmov-po-temam
+      work_kind: film
+      fragment_type: quote
+      tier: 1
+      language: ru
+    - path: /selection/100-citat-iz-filmov-o-lyubvi
+      work_kind: film
+      fragment_type: dialogue
+      tier: 1
+      language: ru
+
+wikiquote_ru:
+  api_url: https://ru.wikiquote.org/w/api.php
+  wiki_base: https://ru.wikiquote.org/wiki
+  source_site: wikiquote.ru
+  language: ru
+  tier: 1
+  parser: wikiquote
+  default_work_kind: other
+  default_fragment_type: quote
+  license_hint: CC-BY-SA-4.0
+  tag: wikiquote_ru
+  categories:
+    - "Категория:Фильмы по алфавиту"
+    - "Категория:Мультфильмы по алфавиту"
+    - "Категория:Литература"
+    - "Категория:Пословицы"
+    - "Категория:Сказки"
+    - "Категория:Афоризмы"
+    - "Категория:Комедии"
+    - "Категория:Телесериалы"
+    - "Категория:Песни"
+
+wikiquote_en:
+  api_url: https://en.wikiquote.org/w/api.php
+  wiki_base: https://en.wikiquote.org/wiki
+  source_site: wikiquote.en
+  language: en
+  tier: 2
+  parser: wikiquote
+  default_work_kind: other
+  default_fragment_type: quote
+  license_hint: CC-BY-SA-4.0
+  tag: wikiquote_en
+  categories:
+    - "Category:Films by title"
+    - "Category:Animated films"
+    - "Category:Literature"
+    - "Category:Proverbs"
+    - "Category:Aphorisms"
+    - "Category:Fairy tales"
+    - "Category:Comedy films"
+    - "Category:Television series"
+    - "Category:Songs"
+
+wikisource_ru:
+  api_url: https://ru.wikisource.org/w/api.php
+  wiki_base: https://ru.wikisource.org/wiki
+  source_site: wikisource.ru
+  language: ru
+  tier: 1
+  parser: wikisource
+  default_work_kind: fairy_tale
+  default_fragment_type: fairy_formula
+  license_hint: CC-BY-SA-4.0
+  tag: wikisource_ru
+  categories:
+    - "Категория:Сказки"
+    - "Категория:Народные сказки"
+    - "Категория:Сборники сказок"
+
+wiktionary_ru:
+  api_url: https://ru.wiktionary.org/w/api.php
+  wiki_base: https://ru.wiktionary.org/wiki
+  source_site: wiktionary.ru
+  language: ru
+  tier: 1
+  parser: wiktionary
+  default_work_kind: proverb_collection
+  default_fragment_type: proverb
+  license_hint: CC-BY-SA-4.0
+  tag: wiktionary_ru
+  categories:
+    - "Категория:Пословицы"
+    - "Категория:Поговорки"
+
+wikisource_en:
+  api_url: https://en.wikisource.org/w/api.php
+  wiki_base: https://en.wikisource.org/wiki
+  source_site: wikisource.en
+  language: en
+  tier: 2
+  parser: wikisource
+  default_work_kind: fairy_tale
+  default_fragment_type: fairy_formula
+  license_hint: CC-BY-SA-4.0
+  tag: wikisource_en
+  categories:
+    - "Category:Fairy tales"
+    - "Category:Children's literature"
+
+culture_ru:
+  base_url: https://www.culture.ru
+  api_url: https://www.culture.ru/api
+  sections:
+    - resource: poems
+      work_kind: poem
+      fragment_type: quote
+      tier: 1
+      language: ru
+    - resource: books
+      work_kind: book
+      fragment_type: quote
+      tier: 1
+      language: ru
+    - resource: movies
+      work_kind: film
+      fragment_type: quote
+      tier: 1
+      language: ru
+      types: movie
+
+anekdot_ru:
+  base_url: https://www.anekdot.ru
+  feeds:
+    - name: aphorism
+      path: /last/aphorism
+      collection_title: "Anekdot.ru — фразы"
+      work_kind: other
+      fragment_type: aphorism
+      tier: 2
+      language: ru
+    - name: anekdot
+      path: /last/anekdot
+      collection_title: "Anekdot.ru — анекдоты"
+      work_kind: other
+      fragment_type: quote
+      tier: 2
+      language: ru
+    - name: story
+      path: /last/story
+      collection_title: "Anekdot.ru — истории"
+      work_kind: other
+      fragment_type: dialogue
+      tier: 2
+      language: ru
+
+poetrydb:
+  enabled: true
+  api_url: https://poetrydb.org
+  language: en
+  tier: 2
+  license_hint: poetrydb.org
+  max_lines_per_poem: 24
+  poems:
+    - author: William Shakespeare
+      title: Sonnet 18
+    - author: William Shakespeare
+      title: Hamlet
+    - author: Emily Dickinson
+      title: Hope is the thing with feathers
+    - author: Oscar Wilde
+      title: The Ballad of Reading Gaol
+    - author: Robert Frost
+      title: The Road Not Taken
+    - author: Robert Frost
+      title: Stopping by Woods on a Snowy Evening
+
+gutenberg:
+  enabled: true
+  base_url: https://www.gutenberg.org
+  license_hint: public-domain
+  max_passages_per_book: 120
+  books:
+    - id: 1342
+      title: Pride and Prejudice
+      author: Jane Austen
+      language: en
+      work_kind: book
+      fragment_type: quote
+      tier: 2
+    - id: 2554
+      title: Crime and Punishment
+      author: Fyodor Dostoyevsky
+      language: en
+      work_kind: book
+      fragment_type: quote
+      tier: 2
+    - id: 2600
+      title: War and Peace
+      author: Leo Tolstoy
+      language: en
+      work_kind: book
+      fragment_type: quote
+      tier: 2
+
+quotable:
+  enabled: false
+  api_url: https://api.quotable.io
+  language: en
+  tier: 2
+  license_hint: quotable.io
+  page_size: 150
+
+opensubtitles:
+  enabled: false
+  api_url: https://api.opensubtitles.com/api/v1
+  language: en
+  tier: 2
+  license_hint: opensubtitles-user-content
+  max_files_per_query: 3
+  queries:
+    - title: The Matrix
+      query: The Matrix
+      work_kind: film
+    - title: Pulp Fiction
+      query: Pulp Fiction
+      work_kind: film
+
+ruscorpora:
+  enabled: false
+  api_url: https://ruscorpora.ru
+  language: ru
+  tier: 1
+  license_hint: ruscorpora.ru
+  corpus_type: POETIC
+  max_contexts_per_query: 80
+  queries:
+    - word: любовь
+    - word: зима
+    - word: море
+
+pushdom:
+  enabled: false
+  language: ru
+  tier: 1
+  license_hint: pushdom-dataset
+  datasets: []

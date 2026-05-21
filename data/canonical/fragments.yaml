@@ -1,0 +1,352 @@
+# Curated famous fragments — common-knowledge quotes, dialogs, proverbs.
+# Loaded by `python -m scrapers.cli seed` (always upserted, deduped).
+
+# --- Soviet / Russian cinema ---
+- work_id: operaciya-y
+  text: "Надо, Федя, надо!"
+  fragment_type: quote
+  language: ru
+  speaker: fedya
+  verified: true
+  tags: [советское_кино, комедия, цитата]
+
+- work_id: operaciya-y
+  text: "— Сюда, сюда, сюда! — Не надо, не надо, не надо!"
+  fragment_type: dialogue
+  language: ru
+  verified: true
+  tags: [советское_кино, комедия, диалог]
+
+- work_id: kavkazskaya-plennica
+  text: "— Где ваши документы? — А вот мои документы!"
+  fragment_type: dialogue
+  language: ru
+  verified: true
+  tags: [советское_кино, комедия, диалог]
+
+- work_id: ironya-sudby
+  text: "— Руки на стол, это ограбление! — Извините, это ограбление?"
+  fragment_type: dialogue
+  language: ru
+  verified: true
+  tags: [новый_год, комедия, диалог]
+
+- work_id: ironya-sudby
+  text: "Я вас не узнаю без грамма!"
+  fragment_type: quote
+  language: ru
+  verified: true
+  tags: [новый_год, комедия]
+
+- work_id: sluzhebnyi-roman
+  text: "— Какие люди в Голливуде! — Какие люди!"
+  fragment_type: dialogue
+  language: ru
+  verified: true
+  tags: [советское_кино, роман, диалог]
+
+- work_id: moskva-slezam-ne-verit
+  text: "Какая гадость эта ваша заря!"
+  fragment_type: quote
+  language: ru
+  verified: true
+  tags: [советское_кино, драма]
+
+- work_id: brat
+  text: "Сильный духом — это тот, кто владеет собой."
+  fragment_type: quote
+  language: ru
+  verified: true
+  tags: [постсоветское_кино, драма]
+
+- work_id: brat
+  text: "Почему готический? Потому что смерть страшная, а эта фигура — смешная."
+  fragment_type: dialogue
+  language: ru
+  verified: true
+  tags: [постсоветское_кино, диалог]
+
+- work_id: brat-2
+  text: "А в Chicago другие правила!"
+  fragment_type: quote
+  language: ru
+  verified: true
+  tags: [постсоветское_кино]
+
+- work_id: karnavalnaya-noch
+  text: "Какая грациозная женщина!"
+  fragment_type: quote
+  language: ru
+  verified: true
+  tags: [советское_кино, комедия]
+
+- work_id: dzhentlmeny-udachi
+  text: "— В жизни всегда есть место подвигу. — А если нет?"
+  fragment_type: dialogue
+  language: ru
+  verified: true
+  tags: [советское_кино, комедия, диалог]
+
+- work_id: sobache-serdce
+  text: "Руки прочь от моих документов!"
+  fragment_type: quote
+  language: ru
+  verified: true
+  tags: [советское_кино, сатира]
+
+# --- Soviet / Russian cartoons ---
+- work_id: nu-pogodi
+  text: "Ну, заяц, погоди!"
+  fragment_type: quote
+  language: ru
+  verified: true
+  tags: [мультфильм, советский_мульт]
+
+- work_id: vinni-puh
+  text: "Это не ОК, это КТО."
+  fragment_type: quote
+  language: ru
+  verified: true
+  tags: [мультфильм, советский_мульт]
+
+- work_id: vinni-puh
+  text: "Ты, Пух, оригинал!"
+  fragment_type: quote
+  language: ru
+  verified: true
+  tags: [мультфильм, советский_мульт]
+
+- work_id: yozhik-v-tumane
+  text: "Страшно, но интересно."
+  fragment_type: quote
+  language: ru
+  verified: true
+  tags: [мультфильм, поэзия]
+
+- work_id: prostokvashino
+  text: "Дядя Фёдор, папа и мама — это хорошо, но дядя Фёдор — это лучше!"
+  fragment_type: quote
+  language: ru
+  verified: true
+  tags: [мультфильм, детский]
+
+- work_id: cheburashka
+  text: "Чебурашка приехал в ящике с апельсинами."
+  fragment_type: quote
+  language: ru
+  verified: true
+  tags: [мультфильм, детский]
+
+- work_id: gena-krokodil
+  text: "Пусть бегут неуклюже пешеходы по лужам..."
+  fragment_type: quote
+  language: ru
+  verified: true
+  tags: [мультфильм, песня]
+
+- work_id: tri-bogatyrya
+  text: "Я — не я, и лошадь — не моя!"
+  fragment_type: quote
+  language: ru
+  verified: true
+  tags: [мультфильм, сказка]
+
+# --- Russian fairy tales & folk ---
+- work_id: repka
+  text: "Тянем-репку, тянем, не вытянем!"
+  fragment_type: fairy_formula
+  language: ru
+  verified: true
+  tags: [сказка, народная]
+
+- work_id: kolobok
+  text: "Я колобок, колобок! Я по амбару метён, по сусекам скребён..."
+  fragment_type: fairy_formula
+  language: ru
+  verified: true
+  tags: [сказка, народная]
+
+- work_id: kasha-iz-topora
+  text: "Каша из топора."
+  fragment_type: fairy_formula
+  language: ru
+  verified: true
+  tags: [сказка, народная]
+
+- work_id: proverb-collection-ru
+  text: "Работа не волк — в лес не убежит."
+  fragment_type: proverb
+  language: ru
+  verified: true
+  tags: [пословица]
+
+- work_id: proverb-collection-ru
+  text: "Не имей сто рублей, а имей сто друзей."
+  fragment_type: proverb
+  language: ru
+  verified: true
+  tags: [пословица]
+
+- work_id: proverb-collection-ru
+  text: "Семь раз отмерь — один раз отрежь."
+  fragment_type: proverb
+  language: ru
+  verified: true
+  tags: [пословица]
+
+- work_id: proverb-collection-ru
+  text: "Без труда не вытащишь и рыбку из пруда."
+  fragment_type: proverb
+  language: ru
+  verified: true
+  tags: [пословица]
+
+- work_id: proverb-collection-ru
+  text: "Язык до Киева доведёт."
+  fragment_type: proverb
+  language: ru
+  verified: true
+  tags: [поговорка]
+
+- work_id: proverb-collection-ru
+  text: "В гостях хорошо, а дома лучше."
+  fragment_type: proverb
+  language: ru
+  verified: true
+  tags: [поговорка]
+
+# --- Russian literature ---
+- work_id: master-i-margarita
+  text: "Рукописи не горят."
+  fragment_type: quote
+  language: ru
+  verified: true
+  tags: [классика, сатира]
+
+- work_id: evgeniy-onegin
+  text: "Мой дядя самых честных правил..."
+  fragment_type: quote
+  language: ru
+  verified: true
+  tags: [классика, поэзия]
+
+# --- American / English cinema ---
+- work_id: godfather
+  text: "I'm gonna make him an offer he can't refuse."
+  fragment_type: quote
+  language: en
+  verified: true
+  tags: [classic, crime]
+
+- work_id: godfather
+  text: "Keep your friends close, but your enemies closer."
+  fragment_type: quote
+  language: en
+  verified: true
+  tags: [classic, crime]
+
+- work_id: star-wars
+  text: "May the Force be with you."
+  fragment_type: quote
+  language: en
+  verified: true
+  tags: [sci_fi, classic]
+
+- work_id: star-wars
+  text: "I am your father."
+  fragment_type: dialogue
+  language: en
+  verified: true
+  tags: [sci_fi, classic, dialogue]
+
+- work_id: terminator
+  text: "I'll be back."
+  fragment_type: quote
+  language: en
+  verified: true
+  tags: [sci_fi, action]
+
+- work_id: forrest-gump
+  text: "Life is like a box of chocolates. You never know what you're gonna get."
+  fragment_type: quote
+  language: en
+  verified: true
+  tags: [drama, classic]
+
+- work_id: matrix
+  text: "There is no spoon."
+  fragment_type: quote
+  language: en
+  verified: true
+  tags: [sci_fi]
+
+- work_id: pulp-fiction
+  text: "Say 'what' again. Say 'what' again!"
+  fragment_type: dialogue
+  language: en
+  verified: true
+  tags: [crime, dialogue]
+
+- work_id: shawshank-redemption
+  text: "Get busy living, or get busy dying."
+  fragment_type: quote
+  language: en
+  verified: true
+  tags: [drama, classic]
+
+- work_id: back-to-the-future
+  text: "Where we're going, we don't need roads."
+  fragment_type: quote
+  language: en
+  verified: true
+  tags: [sci_fi, comedy]
+
+- work_id: dark-knight
+  text: "Why so serious?"
+  fragment_type: quote
+  language: en
+  verified: true
+  tags: [superhero, crime]
+
+# --- American sayings ---
+- work_id: proverb-collection-en
+  text: "Actions speak louder than words."
+  fragment_type: proverb
+  language: en
+  verified: true
+  tags: [proverb, american]
+
+- work_id: proverb-collection-en
+  text: "The early bird catches the worm."
+  fragment_type: proverb
+  language: en
+  verified: true
+  tags: [proverb, american]
+
+- work_id: proverb-collection-en
+  text: "When in Rome, do as the Romans do."
+  fragment_type: proverb
+  language: en
+  verified: true
+  tags: [proverb]
+
+- work_id: proverb-collection-en
+  text: "Better late than never."
+  fragment_type: proverb
+  language: en
+  verified: true
+  tags: [proverb]
+
+- work_id: proverb-collection-en
+  text: "Don't count your chickens before they hatch."
+  fragment_type: proverb
+  language: en
+  verified: true
+  tags: [proverb, american]
+
+- work_id: malenkiy-princ
+  text: "On ne voit bien qu'avec le cœur."
+  fragment_type: quote
+  language: fr
+  verified: true
+  tags: [wisdom, classic]

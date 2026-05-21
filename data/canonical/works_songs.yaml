@@ -1,0 +1,135 @@
+# Soviet songs and extra famous films
+- id: katyusha
+  title: "Катюша"
+  kind: song
+  tier: 1
+  language: ru
+  year: 1938
+  authors: []
+  tags: [war_song, folk]
+
+- id: podmoskovnye-vechera
+  title: "Подмосковные вечера"
+  kind: song
+  tier: 1
+  language: ru
+  year: 1955
+  authors: []
+  tags: [romance, classic]
+
+- id: pust-begut-neuklyuzhe
+  title: "Пусть бегут неуклюже..."
+  kind: song
+  tier: 1
+  language: ru
+  year: 1969
+  authors: []
+  tags: [cartoon, children]
+
+- id: den-pobedy
+  title: "День Победы"
+  kind: song
+  tier: 1
+  language: ru
+  year: 1975
+  authors: []
+  tags: [war_song, memorial]
+
+- id: million-alyh-roz
+  title: "Миллион алых роз"
+  kind: song
+  tier: 1
+  language: ru
+  year: 1983
+  authors: []
+  tags: [romance, pop]
+
+- id: dorogoy-dlinnoyu
+  title: "Дорогой длинною"
+  kind: song
+  tier: 1
+  language: ru
+  year: 1968
+  authors: []
+  tags: [romance, classic]
+
+- id: trava-u-doma
+  title: "Трава у дома"
+  kind: song
+  tier: 1
+  language: ru
+  year: 1983
+  authors: []
+  tags: [film_song, space]
+
+- id: ya-lyublyu-tebya-zhizn
+  title: "Я люблю тебя, жизнь"
+  kind: song
+  tier: 1
+  language: ru
+  year: 1970
+  authors: []
+  tags: [classic, soviet]
+
+- id: kalinka
+  title: "Калинка"
+  kind: song
+  tier: 1
+  language: ru
+  year: null
+  authors: []
+  tags: [folk, classic]
+
+- id: ochi-chernye
+  title: "Очи чёрные"
+  kind: song
+  tier: 1
+  language: ru
+  year: null
+  authors: []
+  tags: [romance, folk]
+
+- id: kogda-druzya-ryadom
+  title: "Когда друзья рядом"
+  kind: song
+  tier: 1
+  language: ru
+  year: null
+  authors: []
+  tags: [friendship, film_song]
+
+- id: brilliantovaya-ruka
+  title: "Бриллиантовая рука"
+  kind: film
+  tier: 1
+  language: ru
+  year: 1968
+  authors: [gaidai]
+  tags: [comedy, soviet_cinema]
+
+- id: dvenadcat-stulev
+  title: "12 стульев"
+  kind: film
+  tier: 1
+  language: ru
+  year: 1971
+  authors: [gaidai]
+  tags: [comedy, satire]
+
+- id: ivan-vasilievich
+  title: "Иван Васильевич меняет профессию"
+  kind: film
+  tier: 1
+  language: ru
+  year: 1973
+  authors: [gaidai]
+  tags: [comedy, soviet_cinema]
+
+- id: samogonschiki
+  title: "Самогонщики"
+  kind: film
+  tier: 1
+  language: ru
+  year: 1961
+  authors: [gaidai]
+  tags: [comedy, short]

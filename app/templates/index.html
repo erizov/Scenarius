@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html lang="{{ ui_lang }}">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>{{ app_name }}</title>
+
+  <link rel="stylesheet" href="/static/style.css">
+
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+
+</head>
+
+<body>
+
+  <div class="page">
+
+    <header class="header">
+
+      <div class="brand-row">
+
+        <div class="brand">
+
+          <h1>{{ app_name }}</h1>
+
+          <p class="subtitle">{{ t.subtitle }}</p>
+
+        </div>
+
+        <div class="lang-toggle" aria-label="{{ t.ui_lang }}">
+
+          {% for code in supported_langs %}
+
+          <a
+
+            href="/set-lang?lang={{ code }}&next={{ request.url.path }}"
+
+            class="lang-btn {% if ui_lang == code %}active{% endif %}"
+
+          >{{ code | upper }}</a>
+
+          {% endfor %}
+
+        </div>
+
+      </div>
+
+      <nav class="nav-tabs">
+        <a href="/" class="nav-tab {% if active_nav == 'browse' %}active{% endif %}">{{ t.nav_browse }}</a>
+        <a href="/create" class="nav-tab {% if active_nav == 'create' %}active{% endif %}">{{ t.nav_create }}</a>
+      </nav>
+
+      <form class="search" method="get" action="/">
+
+        <input type="hidden" name="ui_lang" value="{{ ui_lang }}">
+
+        <input
+
+          type="search"
+
+          name="q"
+
+          value="{{ q }}"
+
+          placeholder="{{ t.search_placeholder }}"
+
+          aria-label="{{ t.search_label }}"
+
+        >
+
+        <select name="language" aria-label="{{ t.language_label }}">
+
+          <option value="">{{ t.all_languages }}</option>
+
+          <option value="ru" {% if language == "ru" %}selected{% endif %}>RU</option>
+
+          <option value="en" {% if language == "en" %}selected{% endif %}>EN</option>
+
+          <option value="fr" {% if language == "fr" %}selected{% endif %}>FR</option>
+
+        </select>
+
+        <select name="fragment_type" aria-label="{{ t.type_label }}">
+
+          <option value="">{{ t.all_types }}</option>
+
+          <option value="quote" {% if fragment_type == "quote" %}selected{% endif %}>{{ t.type_quote }}</option>
+
+          <option value="dialogue" {% if fragment_type == "dialogue" %}selected{% endif %}>{{ t.type_dialogue }}</option>
+
+          <option value="proverb" {% if fragment_type == "proverb" %}selected{% endif %}>{{ t.type_proverb }}</option>
+
+          <option value="aphorism" {% if fragment_type == "aphorism" %}selected{% endif %}>{{ t.type_aphorism }}</option>
+
+        </select>
+
+        <button type="submit">{{ t.search_button }}</button>
+
+      </form>
+
+    </header>
+
+
+
+    <main>
+
+      <p class="meta">{{ total }} {{ t.records }}</p>
+
+
+
+      {% if items %}
+
+      <section class="quotes">
+
+        {% for item in items %}
+
+        <article class="quote-card">
+
+          <blockquote>{{ item.text }}</blockquote>
+
+          <footer>
+
+            {% if item.work %}
+
+            <span class="source">{{ item.work.title }}{% if item.work.year %}, {{ item.work.year }}{% endif %}</span>
+
+            {% endif %}
+
+            {% if item.speaker %}
+
+            <span class="speaker">— {{ item.speaker.name }}</span>
+
+            {% endif %}
+
+            <span class="badge">{{ item.fragment_type }}</span>
+
+            <span class="badge lang">{{ item.language }}</span>
+
+            {% if item.verified %}
+
+            <span class="badge verified">✓</span>
+
+            {% endif %}
+
+          </footer>
+
+        </article>
+
+        {% endfor %}
+
+      </section>
+
+      {% else %}
+
+      <div class="empty">
+
+        <p>{{ t.empty }}</p>
+
+        <code>{{ t.empty_cmd }}</code>
+
+      </div>
+
+      {% endif %}
+
+    </main>
+
+
+
+    <footer class="footer">
+
+      <a href="/docs">{{ t.api_link }}</a>
+
+    </footer>
+
+  </div>
+
+</body>
+
+</html>
+

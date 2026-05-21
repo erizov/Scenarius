@@ -1,0 +1,45 @@
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: scenarius
+      POSTGRES_PASSWORD: scenarius
+      POSTGRES_DB: scenarius
+    ports:
+      - "5435:5432"
+    volumes:
+      - scenarius_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U scenarius -d scenarius"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    profiles:
+      - cache
+
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql+psycopg://scenarius:scenarius@db:5432/scenarius
+      APP_ENV: development
+      APP_DEBUG: "true"
+      EMBEDDING_ENABLED: "true"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - .:/app
+    command: >
+      sh -c "pip install -e '.[embeddings]' -q &&
+             alembic upgrade head &&
+             uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+
+volumes:
+  scenarius_pgdata:

@@ -1,0 +1,28 @@
+# Corpus scale and per-source ingest budgets (dedup reduces final total).
+target_total: 100000
+
+budgets:
+  citaty_info: 15000
+  culture_ru: 12000
+  anekdot_ru: 5000
+  wikisource_ru_pages: 200
+  wiktionary_ru_pages: 150
+  wikiquote_ru_pages: 350
+  wikiquote_en_pages: 400
+  wikisource_en_pages: 100
+  poetrydb: 2500
+  gutenberg: 2000
+  quotable: 800
+  opensubtitles: 1500
+  ruscorpora: 2000
+  pushdom: 1000
+
+# culture.ru API pages per resource (poems, books, movies)
+culture_pages: 40
+
+# anekdot.ru listing pages per feed
+anekdot_pages: 80
+
+# Tier policy: RU = 1 (primary), EN and other = 2
+tier_ru: 1
+tier_foreign: 2

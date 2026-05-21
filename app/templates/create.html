@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="{{ ui_lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ app_name }} — {{ t.nav_create }}</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <div class="brand-row">
+        <div class="brand">
+          <h1>{{ app_name }}</h1>
+          <p class="subtitle">{{ t.create_subtitle }}</p>
+        </div>
+        <div class="lang-toggle" aria-label="{{ t.ui_lang }}">
+          {% for code in supported_langs %}
+          <a
+            href="/set-lang?lang={{ code }}&next=/create"
+            class="lang-btn {% if ui_lang == code %}active{% endif %}"
+          >{{ code | upper }}</a>
+          {% endfor %}
+        </div>
+      </div>
+
+      <nav class="nav-tabs">
+        <a href="/" class="nav-tab">{{ t.nav_browse }}</a>
+        <a href="/create" class="nav-tab active">{{ t.nav_create }}</a>
+      </nav>
+    </header>
+
+    <main>
+      <form
+        class="create-form"
+        hx-post="/api/v1/stories/generate"
+        hx-target="#story-result"
+        hx-swap="innerHTML"
+        hx-indicator="#generate-spinner"
+      >
+        <input type="hidden" name="language" value="{{ ui_lang }}">
+
+        <div class="segmented" role="tablist">
+          <button type="button" class="segment active" data-mode="url">{{ t.input_mode_url }}</button>
+          <button type="button" class="segment" data-mode="text">{{ t.input_mode_text }}</button>
+        </div>
+
+        <div class="field-group" id="field-url">
+          <label for="news-url">{{ t.news_url_label }}</label>
+          <input
+            type="url"
+            id="news-url"
+            name="url"
+            placeholder="{{ t.news_url_placeholder }}"
+          >
+        </div>
+
+        <div class="field-group hidden" id="field-text">
+          <label for="news-text">{{ t.news_text_label }}</label>
+          <textarea
+            id="news-text"
+            name="text"
+            rows="6"
+            placeholder="{{ t.news_text_placeholder }}"
+          ></textarea>
+        </div>
+
+        <div class="field-group">
+          <label for="story-format">{{ t.format_label }}</label>
+          <select id="story-format" name="format">
+            <option value="parable">{{ t.format_parable }}</option>
+            <option value="fairy_tale">{{ t.format_fairy_tale }}</option>
+            <option value="anecdote">{{ t.format_anecdote }}</option>
+            <option value="story" selected>{{ t.format_story }}</option>
+          </select>
+        </div>
+
+        <button type="submit" class="primary-btn">
+          <span class="btn-label">{{ t.generate_button }}</span>
+          <span id="generate-spinner" class="htmx-indicator">{{ t.generating }}</span>
+        </button>
+      </form>
+
+      <div id="story-result" class="story-result"></div>
+    </main>
+
+    <footer class="footer">
+      <a href="/docs">{{ t.api_link }}</a>
+    </footer>
+  </div>
+
+  <script>
+    const segments = document.querySelectorAll(".segment");
+    const fieldUrl = document.getElementById("field-url");
+    const fieldText = document.getElementById("field-text");
+    const urlInput = document.getElementById("news-url");
+    const textInput = document.getElementById("news-text");
+
+    segments.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        segments.forEach((item) => item.classList.remove("active"));
+        btn.classList.add("active");
+        const mode = btn.dataset.mode;
+        const isUrl = mode === "url";
+        fieldUrl.classList.toggle("hidden", !isUrl);
+        fieldText.classList.toggle("hidden", isUrl);
+        if (isUrl) {
+          textInput.removeAttribute("name");
+          urlInput.setAttribute("name", "url");
+        } else {
+          urlInput.removeAttribute("name");
+          textInput.setAttribute("name", "text");
+        }
+      });
+    });
+  </script>
+</body>
+</html>

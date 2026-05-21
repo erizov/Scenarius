@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+.venv/
+venv/
+.env
+
+# Data caches
+data/raw/
+data/ingest_pull_log.json
+data/backups/
+*.sql
+*.sql.gz
+*.dump
+
+# IDE
+.idea/
+.vscode/
+.qodo/
+*.swp
+
+# Test / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Research artifacts (optional local notes)
+*-sources.json
+quote-sources-research.json
+movie-quote-sources.json

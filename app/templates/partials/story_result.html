@@ -1,0 +1,28 @@
+<article class="story-card">
+  <header class="story-meta">
+    <h2>{{ result.news_title }}</h2>
+    {% if result.news_source_url %}
+    <a href="{{ result.news_source_url }}" class="story-source" target="_blank" rel="noopener">{{ result.news_source_url }}</a>
+    {% endif %}
+  </header>
+  <div class="story-body">{{ result.story }}</div>
+  <footer class="story-footer">
+    <span class="badge">{{ result.format }}</span>
+    <span class="badge">{{ result.provider }} / {{ result.model }}</span>
+  </footer>
+</article>
+
+{% if result.citations %}
+<details class="sources-panel">
+  <summary>{{ t.sources_title }} ({{ result.citations | length }})</summary>
+  <ul class="sources-list">
+    {% for item in result.citations %}
+    <li>
+      <span class="source-type">{{ item.fragment_type }}</span>
+      {% if item.work_title %}<span class="source-work">{{ item.work_title }}</span>{% endif %}
+      <blockquote>{{ item.text }}</blockquote>
+    </li>
+    {% endfor %}
+  </ul>
+</details>
+{% endif %}

@@ -1,0 +1,37 @@
+# Scenarius PostgreSQL instances on this machine.
+# Use POSTGRES_TARGET=docker|pg16|pg17|pg15 in .env
+#
+# port 5432 -> PostgreSQL 15 (E:/Postgres/15) — NO pgvector
+# port 5433 -> PostgreSQL 17
+# port 5434 -> PostgreSQL 16 — use for native install
+# port 5435 -> Docker pgvector/pg16 (recommended for Scenarius)
+
+docker:
+  version: 16
+  host: localhost
+  port: 5435
+  user: scenarius
+  password: scenarius
+  database: scenarius
+  pgvector: true
+
+pg16:
+  version: 16
+  host: localhost
+  port: 5434
+  bin: "C:/Program Files/PostgreSQL/16/bin"
+  pgvector: false
+
+pg17:
+  version: 17
+  host: localhost
+  port: 5433
+  bin: "C:/Program Files/PostgreSQL/17/bin"
+  pgvector: false
+
+pg15:
+  version: 15
+  host: localhost
+  port: 5432
+  bin: "E:/Postgres/15/bin"
+  pgvector: false

@@ -1,0 +1,421 @@
+# Canonical works registry (tier 1 = RU priority, tier 2 = foreign)
+# Optional citaty_path: direct page on citaty.info for priority ingest
+
+# --- Tier 1: Soviet / Russian cinema ---
+- id: operaciya-y
+  title: "Операция «Ы» и другие приключения Шурика"
+  kind: film
+  tier: 1
+  language: ru
+  year: 1965
+  authors: [gaidai]
+  citaty_path: /movie/operaciya-y-i-drugie-priklyucheniya-shurika
+  tags: [comedy, soviet_cinema]
+
+- id: kavkazskaya-plennica
+  title: "Кавказская пленница, или Новые приключения Шурика"
+  kind: film
+  tier: 1
+  language: ru
+  year: 1967
+  authors: [gaidai]
+  citaty_path: /movie/kavkazskaya-plennica-ili-novye-priklyucheniya-shurika
+  tags: [comedy, soviet_cinema]
+
+- id: ironya-sudby
+  title: "Ирония судьбы, или С лёгким паром!"
+  kind: film
+  tier: 1
+  language: ru
+  year: 1975
+  authors: [ryazanov]
+  citaty_path: /movie/ironiya-sudby-ili-s-lyogkim-parom-0
+  tags: [comedy, new_year]
+
+- id: sluzhebnyi-roman
+  title: "Служебный роман"
+  kind: film
+  tier: 1
+  language: ru
+  year: 1977
+  authors: [ryazanov]
+  citaty_path: /movie/sluzhebnyi-roman
+  tags: [comedy, romance, soviet_cinema]
+
+- id: moskva-slezam-ne-verit
+  title: "Москва слезам не верит"
+  kind: film
+  tier: 1
+  language: ru
+  year: 1979
+  authors: [ryazanov]
+  citaty_path: /movie/moskva-slezam-ne-verit
+  tags: [drama, soviet_cinema]
+
+- id: karnavalnaya-noch
+  title: "Карнавальная ночь"
+  kind: film
+  tier: 1
+  language: ru
+  year: 1956
+  authors: [ryazanov]
+  citaty_path: /movie/karnavalnaya-noch
+  tags: [comedy, new_year]
+
+- id: dzhentlmeny-udachi
+  title: "Джентльмены удачи"
+  kind: film
+  tier: 1
+  language: ru
+  year: 1971
+  authors: []
+  citaty_path: /movie/dzhentlmeny-udachi
+  tags: [comedy, soviet_cinema]
+
+- id: brat
+  title: "Брат"
+  kind: film
+  tier: 1
+  language: ru
+  year: 1997
+  authors: []
+  citaty_path: /movie/brat
+  tags: [drama, post_soviet]
+
+- id: brat-2
+  title: "Брат 2"
+  kind: film
+  tier: 1
+  language: ru
+  year: 2000
+  authors: []
+  citaty_path: /movie/brat-2
+  tags: [drama, post_soviet]
+
+- id: sobache-serdce
+  title: "Собачье сердце"
+  kind: film
+  tier: 1
+  language: ru
+  year: 1988
+  authors: [bulgakov]
+  citaty_path: /movie/sobache-serdce
+  tags: [satire, soviet_cinema]
+
+- id: afonya
+  title: "Афоня"
+  kind: film
+  tier: 1
+  language: ru
+  year: 1975
+  authors: []
+  tags: [comedy, soviet_cinema]
+
+- id: stalker
+  title: "Сталкер"
+  kind: film
+  tier: 1
+  language: ru
+  year: 1979
+  authors: []
+  tags: [sci_fi, soviet_cinema]
+
+- id: solaris
+  title: "Солярис"
+  kind: film
+  tier: 1
+  language: ru
+  year: 1972
+  authors: []
+  tags: [sci_fi, soviet_cinema]
+
+- id: pokrovskie-vorota
+  title: "Покровские ворота"
+  kind: film
+  tier: 1
+  language: ru
+  year: 1982
+  authors: []
+  tags: [comedy, soviet_cinema]
+
+- id: lyubov-i-golubi
+  title: "Любовь и голуби"
+  kind: film
+  tier: 1
+  language: ru
+  year: 1984
+  authors: []
+  tags: [comedy, soviet_cinema]
+
+# --- Tier 1: Soviet / Russian cartoons ---
+- id: nu-pogodi
+  title: "Ну, погоди!"
+  kind: cartoon
+  tier: 1
+  language: ru
+  year: 1969
+  authors: []
+  tags: [cartoon, comedy]
+
+- id: yozhik-v-tumane
+  title: "Ёжик в тумане"
+  kind: cartoon
+  tier: 1
+  language: ru
+  year: 1975
+  authors: []
+  tags: [cartoon, poetry]
+
+- id: vinni-puh
+  title: "Винни-Пух"
+  kind: cartoon
+  tier: 1
+  language: ru
+  year: 1969
+  authors: []
+  tags: [cartoon, children]
+
+- id: prostokvashino
+  title: "Трое из Простоквашино"
+  kind: cartoon
+  tier: 1
+  language: ru
+  year: 1978
+  authors: []
+  tags: [cartoon, children]
+
+- id: cheburashka
+  title: "Чебурашка"
+  kind: cartoon
+  tier: 1
+  language: ru
+  year: 1971
+  authors: []
+  tags: [cartoon, children]
+
+- id: gena-krokodil
+  title: "Крокодил Гена"
+  kind: cartoon
+  tier: 1
+  language: ru
+  year: 1969
+  authors: []
+  tags: [cartoon, children]
+
+- id: tri-bogatyrya
+  title: "Три богатыря"
+  kind: cartoon
+  tier: 1
+  language: ru
+  year: 2004
+  authors: []
+  tags: [cartoon, fairy_tale]
+
+- id: lebedi-naprolet
+  title: "Лебеди налета"
+  kind: cartoon
+  tier: 1
+  language: ru
+  year: 1957
+  authors: []
+  tags: [cartoon, poetry]
+
+- id: kapitan-vrungel
+  title: "Приключения капитана Вруngel"
+  kind: cartoon
+  tier: 1
+  language: ru
+  year: 1976
+  authors: []
+  tags: [cartoon, adventure]
+
+- id: volk-i-semero-kozlyat
+  title: "Волк и семеро козлят"
+  kind: cartoon
+  tier: 1
+  language: ru
+  year: 1957
+  authors: []
+  tags: [cartoon, fairy_tale]
+
+# --- Tier 1: Russian literature & fairy tales ---
+- id: master-i-margarita
+  title: "Мастер и Маргарита"
+  kind: book
+  tier: 1
+  language: ru
+  year: 1967
+  authors: [bulgakov]
+  tags: [classic, satire]
+
+- id: evgeniy-onegin
+  title: "Евгений Онегин"
+  kind: poem
+  tier: 1
+  language: ru
+  year: 1833
+  authors: [pushkin]
+  tags: [classic, poetry]
+
+- id: prestuplenie-i-nakazanie
+  title: "Преступление и наказание"
+  kind: book
+  tier: 1
+  language: ru
+  year: 1866
+  authors: [dostoevsky]
+  tags: [classic, drama]
+
+- id: repka
+  title: "Репка"
+  kind: fairy_tale
+  tier: 1
+  language: ru
+  year: null
+  authors: []
+  tags: [fairy_tale, folk]
+
+- id: kolobok
+  title: "Колобок"
+  kind: fairy_tale
+  tier: 1
+  language: ru
+  year: null
+  authors: []
+  tags: [fairy_tale, folk]
+
+- id: kasha-iz-topora
+  title: "Каша из топора"
+  kind: fairy_tale
+  tier: 1
+  language: ru
+  year: null
+  authors: []
+  tags: [fairy_tale, folk]
+
+- id: morozko
+  title: "Морозко"
+  kind: fairy_tale
+  tier: 1
+  language: ru
+  year: null
+  authors: []
+  tags: [fairy_tale, folk]
+
+- id: proverb-collection-ru
+  title: "Русские пословицы и поговорки"
+  kind: proverb_collection
+  tier: 1
+  language: ru
+  year: null
+  authors: []
+  tags: [proverb]
+
+# --- Tier 2: Western cinema & literature ---
+- id: godfather
+  title: "The Godfather"
+  kind: film
+  tier: 2
+  language: en
+  year: 1972
+  authors: []
+  tags: [crime, classic]
+
+- id: star-wars
+  title: "Star Wars"
+  kind: film
+  tier: 2
+  language: en
+  year: 1977
+  authors: []
+  tags: [sci_fi, classic]
+
+- id: terminator
+  title: "The Terminator"
+  kind: film
+  tier: 2
+  language: en
+  year: 1984
+  authors: []
+  tags: [sci_fi, action]
+
+- id: forrest-gump
+  title: "Forrest Gump"
+  kind: film
+  tier: 2
+  language: en
+  year: 1994
+  authors: []
+  tags: [drama, classic]
+
+- id: matrix
+  title: "The Matrix"
+  kind: film
+  tier: 2
+  language: en
+  year: 1999
+  authors: []
+  tags: [sci_fi]
+
+- id: pulp-fiction
+  title: "Pulp Fiction"
+  kind: film
+  tier: 2
+  language: en
+  year: 1994
+  authors: []
+  tags: [crime, classic]
+
+- id: shawshank-redemption
+  title: "The Shawshank Redemption"
+  kind: film
+  tier: 2
+  language: en
+  year: 1994
+  authors: []
+  tags: [drama, classic]
+
+- id: back-to-the-future
+  title: "Back to the Future"
+  kind: film
+  tier: 2
+  language: en
+  year: 1985
+  authors: []
+  tags: [sci_fi, comedy]
+
+- id: dark-knight
+  title: "The Dark Knight"
+  kind: film
+  tier: 2
+  language: en
+  year: 2008
+  authors: []
+  tags: [superhero, crime]
+
+- id: titanic
+  title: "Titanic"
+  kind: film
+  tier: 2
+  language: en
+  year: 1997
+  authors: []
+  tags: [drama, romance]
+
+- id: proverb-collection-en
+  title: "English proverbs and sayings"
+  kind: proverb_collection
+  tier: 2
+  language: en
+  year: null
+  authors: []
+  tags: [proverb]
+
+- id: malenkiy-princ
+  title: "Le Petit Prince"
+  kind: book
+  tier: 2
+  language: fr
+  year: 1943
+  authors: [exupery]
+  tags: [wisdom, classic]
