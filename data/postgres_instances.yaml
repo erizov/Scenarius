@@ -3,7 +3,7 @@
 #
 # port 5432 -> PostgreSQL 15 (E:/Postgres/15) — NO pgvector
 # port 5433 -> PostgreSQL 17
-# port 5434 -> PostgreSQL 16 — use for native install
+# port 5434 -> PostgreSQL 18 (native, C:/Program Files/PostgreSQL/18)
 # port 5435 -> Docker pgvector/pg16 (recommended for Scenarius)
 
 docker:
@@ -14,6 +14,13 @@ docker:
   password: scenarius
   database: scenarius
   pgvector: true
+
+pg18:
+  version: 18
+  host: localhost
+  port: 5434
+  bin: "C:/Program Files/PostgreSQL/18/bin"
+  pgvector: false
 
 pg16:
   version: 16

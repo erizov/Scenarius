@@ -1,4 +1,4 @@
-<article class="story-card">
+<article class="story-card {% if result.format == 'comment' %}comment-card{% endif %}">
   <header class="story-meta">
     <h2>{{ result.news_title }}</h2>
     {% if result.news_source_url %}
@@ -6,14 +6,15 @@
     {% endif %}
   </header>
   <div class="story-body">{{ result.story }}</div>
-  <footer class="story-footer">
-    <span class="badge">{{ result.format }}</span>
-    <span class="badge">{{ result.provider }} / {{ result.model }}</span>
-  </footer>
+  <div class="diag-panel" aria-label="{{ t.diag_title }}">
+    <span class="diag-item"><strong>{{ t.diag_format }}:</strong> {{ format_label }}</span>
+    <span class="diag-item"><strong>{{ t.diag_rag }}:</strong> {{ result.citations | length }}</span>
+    <span class="diag-item"><strong>{{ t.diag_llm }}:</strong> {{ result.provider }} / {{ result.model }}</span>
+  </div>
 </article>
 
 {% if result.citations %}
-<details class="sources-panel">
+<details class="sources-panel" open>
   <summary>{{ t.sources_title }} ({{ result.citations | length }})</summary>
   <ul class="sources-list">
     {% for item in result.citations %}
@@ -25,4 +26,6 @@
     {% endfor %}
   </ul>
 </details>
+{% else %}
+<p class="diag-warn">{{ t.diag_no_citations }}</p>
 {% endif %}

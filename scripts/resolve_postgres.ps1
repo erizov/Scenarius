@@ -11,6 +11,7 @@ if (-not $EnvFile) {
 
 $targets = @{
     docker = @{ Port = 5435; PsqlBin = $null; Pgvector = $true }
+    pg18   = @{ Port = 5434; PsqlBin = "$env:ProgramFiles\PostgreSQL\18\bin\psql.exe"; Pgvector = $false }
     pg16   = @{ Port = 5434; PsqlBin = "$env:ProgramFiles\PostgreSQL\16\bin\psql.exe"; Pgvector = $false }
     pg17   = @{ Port = 5433; PsqlBin = "$env:ProgramFiles\PostgreSQL\17\bin\psql.exe"; Pgvector = $false }
     pg15   = @{ Port = 5432; PsqlBin = "E:\Postgres\15\bin\psql.exe"; Pgvector = $false }
@@ -28,7 +29,7 @@ if (Test-Path $EnvFile) {
 $target = if ($vars["POSTGRES_TARGET"]) { $vars["POSTGRES_TARGET"] } else { "pg16" }
 $meta = $targets[$target]
 if (-not $meta) {
-    Write-Error "Unknown POSTGRES_TARGET '$target'. Use: docker, pg16, pg17, pg15"
+    Write-Error "Unknown POSTGRES_TARGET '$target'. Use: docker, pg18, pg16, pg17, pg15"
 }
 
 [PSCustomObject]@{

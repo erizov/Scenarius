@@ -1,4 +1,7 @@
 <div class="story-error">
-  <h3>{{ t.error_title }}</h3>
+  <h3>{{ t.error_title }}{% if status_code %} ({{ status_code }}){% endif %}</h3>
   <p>{{ error }}</p>
+  {% if hint %}
+  <p class="error-hint">{{ hint }}</p>
+  {% endif %}
 </div>

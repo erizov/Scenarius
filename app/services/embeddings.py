@@ -48,6 +48,12 @@ def embed_text(value: str) -> list[float] | None:
 _embeddings_table_available: bool | None = None
 
 
+def reset_embeddings_table_cache() -> None:
+    """Clear cached pgvector table probe (after migrations)."""
+    global _embeddings_table_available
+    _embeddings_table_available = None
+
+
 def _embeddings_table_exists(db: Session) -> bool:
     """Return True when fragment_embeddings exists (pgvector migrated)."""
     global _embeddings_table_available
@@ -90,6 +96,10 @@ def semantic_match(
     limit: int = 5,
 ) -> list[Fragment]:
     """Find fragments by cosine similarity via pgvector."""
+    if not _embeddings_table_exists(db):
+        logger.info("embeddings.table_missing", fallback="keyword")
+        return []
+
     vector = embed_text(context)
     if vector is None:
         return []

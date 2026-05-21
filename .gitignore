@@ -17,6 +17,9 @@ data/backups/
 *.sql.gz
 *.dump
 
+# Runtime
+.run/
+
 # IDE
 .idea/
 .vscode/

@@ -110,6 +110,19 @@ def select_provider(client: httpx.Client | None = None) -> str:
             client.close()
 
 
+def _ollama_error_message(exc: httpx.HTTPError) -> str:
+    """Build a user-facing hint for Ollama failures."""
+    if isinstance(exc, httpx.HTTPStatusError) and exc.response.status_code == 404:
+        return (
+            f"Ollama model '{settings.ollama_model}' not found. "
+            f"Run: ollama pull {settings.ollama_model} "
+            "or set OLLAMA_MODEL in .env (ollama list)."
+        )
+    return (
+        "Ollama generation failed. Check ollama serve and OLLAMA_MODEL in .env."
+    )
+
+
 def generate_text(prompt: str) -> LLMResult:
     """Generate story text using configured provider strategy."""
     with httpx.Client() as client:
@@ -120,8 +133,12 @@ def generate_text(prompt: str) -> LLMResult:
             except httpx.HTTPError as exc:
                 logger.warning("llm.ollama_failed", error=str(exc))
                 if settings.llm_provider.lower() == "ollama":
-                    raise LLMUnavailableError("Ollama generation failed") from exc
+                    raise LLMUnavailableError(
+                        _ollama_error_message(exc),
+                    ) from exc
                 if settings.openai_api_key:
                     return _generate_openai(prompt)
-                raise LLMUnavailableError("Ollama failed and no OpenAI key") from exc
+                raise LLMUnavailableError(
+                    _ollama_error_message(exc),
+                ) from exc
         return _generate_openai(prompt)

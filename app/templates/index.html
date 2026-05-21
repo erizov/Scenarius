@@ -51,8 +51,8 @@
       </div>
 
       <nav class="nav-tabs">
+        <a href="/comment" class="nav-tab {% if active_nav == 'comment' %}active{% endif %}">{{ t.nav_comment }}</a>
         <a href="/" class="nav-tab {% if active_nav == 'browse' %}active{% endif %}">{{ t.nav_browse }}</a>
-        <a href="/create" class="nav-tab {% if active_nav == 'create' %}active{% endif %}">{{ t.nav_create }}</a>
       </nav>
 
       <form class="search" method="get" action="/">

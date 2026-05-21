@@ -7,7 +7,7 @@ from pathlib import Path
 import structlog
 
 from fastapi import Depends, FastAPI, HTTPException, Query, Request
-
+from fastapi.exceptions import RequestValidationError
 from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 
 from fastapi.staticfiles import StaticFiles
@@ -26,7 +26,7 @@ from app.config import settings
 
 from app.db import get_db
 
-from app.i18n import normalize_ui_lang, ui_context
+from app.i18n import normalize_ui_lang, translate, ui_context
 
 from app.services import fragments as fragment_service
 
@@ -86,25 +86,91 @@ app.include_router(review_router)
 app.include_router(generation_router)
 
 
-@app.exception_handler(HTTPException)
-async def http_exception_handler(
+def _error_hint(status_code: int, lang: str) -> str | None:
+    if status_code == 503:
+        return translate(lang, "error_llm_hint")
+    if status_code == 400:
+        return translate(lang, "error_input_hint")
+    return None
+
+
+def _htmx_error_response(
     request: Request,
-    exc: HTTPException,
+    *,
+    detail: str,
+    status_code: int,
 ) -> HTMLResponse | JSONResponse:
-    """Return HTML partials for htmx error responses."""
     if request.headers.get("HX-Request") == "true":
         lang = normalize_ui_lang(request.cookies.get("ui_lang"))
         ctx = ui_context(lang)
         return templates.TemplateResponse(
             request=request,
             name="partials/story_error.html",
-            context={"error": exc.detail, **ctx},
-            status_code=exc.status_code,
+            context={
+                "error": detail,
+                "status_code": status_code,
+                "hint": _error_hint(status_code, lang),
+                **ctx,
+            },
+            status_code=status_code,
         )
-    return JSONResponse(
+    return JSONResponse(status_code=status_code, content={"detail": detail})
+
+
+@app.exception_handler(HTTPException)
+async def http_exception_handler(
+    request: Request,
+    exc: HTTPException,
+) -> HTMLResponse | JSONResponse:
+    """Return HTML partials for htmx error responses."""
+    detail = exc.detail if isinstance(exc.detail, str) else str(exc.detail)
+    return _htmx_error_response(
+        request,
+        detail=detail,
         status_code=exc.status_code,
-        content={"detail": exc.detail},
     )
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(
+    request: Request,
+    exc: RequestValidationError,
+) -> HTMLResponse | JSONResponse:
+    """Surface validation errors in the comment UI."""
+    detail = "; ".join(
+        f"{'.'.join(str(part) for part in err['loc'])}: {err['msg']}"
+        for err in exc.errors()
+    )
+    return _htmx_error_response(request, detail=detail, status_code=422)
+
+
+@app.exception_handler(Exception)
+async def unhandled_exception_handler(
+    request: Request,
+    exc: Exception,
+) -> HTMLResponse | JSONResponse:
+    """Avoid silent failures; show HTML errors in the browser."""
+    logger.exception("app.unhandled_error", error=str(exc))
+    detail = str(exc) or "Internal server error"
+    lang = normalize_ui_lang(request.cookies.get("ui_lang"))
+    ctx = ui_context(lang)
+    wants_html = (
+        request.headers.get("HX-Request") == "true"
+        or "text/html" in request.headers.get("accept", "")
+    )
+    if wants_html:
+        return templates.TemplateResponse(
+            request=request,
+            name="partials/story_error.html",
+            context={
+                "error": detail,
+                "status_code": 500,
+                "hint": None,
+                **ctx,
+            },
+            status_code=500,
+        )
+    return JSONResponse(status_code=500, content={"detail": detail})
 
 
 def _resolve_ui_lang(request: Request, ui_lang: str | None) -> str:
@@ -196,19 +262,25 @@ def home(
 
 
 @app.get("/create", response_class=HTMLResponse)
-def create_page(
+def create_page_redirect() -> RedirectResponse:
+    """Backward-compatible redirect to the comment UI."""
+    return RedirectResponse(url="/comment", status_code=307)
+
+
+@app.get("/comment", response_class=HTMLResponse)
+def comment_page(
     request: Request,
     ui_lang: str | None = Query(default=None),
 ) -> HTMLResponse:
-    """Render the story generation page."""
+    """Render the news comment page (RAG + LLM)."""
     lang = _resolve_ui_lang(request, ui_lang)
     ctx = ui_context(lang)
     return templates.TemplateResponse(
         request=request,
-        name="create.html",
+        name="comment.html",
         context={
             "app_name": settings.app_name,
-            "active_nav": "create",
+            "active_nav": "comment",
             **ctx,
         },
     )

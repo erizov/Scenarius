@@ -25,6 +25,7 @@ from scrapers import (
     wikisource,
     wiktionary,
 )
+from scrapers import embed_backfill
 from scrapers.corpus import ingest_defaults
 from scrapers.fail_fast import fail_fast_context
 from scrapers.pull_log import PullLog
@@ -288,6 +289,28 @@ def main(argv: list[str] | None = None) -> int:
     stats_parser.add_argument("--interval", type=float, default=5.0)
     stats_parser.add_argument("--recent-minutes", type=int, default=5)
 
+    embed_parser = sub.add_parser(
+        "embed-all",
+        help="Backfill fragment embeddings (requires pgvector)",
+    )
+    embed_parser.add_argument(
+        "--batch-size",
+        type=int,
+        default=128,
+        help="Fragments per embedding batch",
+    )
+    embed_parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Recompute embeddings for all fragments",
+    )
+    embed_parser.add_argument(
+        "--limit",
+        type=int,
+        default=None,
+        help="Max fragments to process (default: all missing)",
+    )
+
     args = parser.parse_args(argv)
 
     if args.command == "seed":
@@ -474,6 +497,17 @@ def main(argv: list[str] | None = None) -> int:
                 str(args.recent_minutes),
             ],
         )
+
+    if args.command == "embed-all":
+        with SessionLocal() as db:
+            result = embed_backfill.run_embed_backfill(
+                db,
+                batch_size=args.batch_size,
+                force=args.force,
+                limit=args.limit,
+            )
+        print(result)
+        return 0
 
     parser.error(f"Unknown command: {args.command}")
     return 1

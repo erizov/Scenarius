@@ -45,7 +45,7 @@ def test_generate_story_endpoint_json(monkeypatch, sample_story_result) -> None:
         "/api/v1/stories/generate",
         json={
             "text": "А" * 100,
-            "format": "story",
+            "format": "comment",
             "language": "ru",
         },
     )
@@ -54,6 +54,23 @@ def test_generate_story_endpoint_json(monkeypatch, sample_story_result) -> None:
     assert payload["story"] == sample_story_result.story
     assert payload["provider"] == "ollama"
     assert len(payload["citations"]) == 1
+
+
+def test_generate_comment_default_format(monkeypatch, sample_story_result) -> None:
+    def fake_generate(db, **kwargs):
+        assert kwargs["story_format"] == "comment"
+        return sample_story_result
+
+    monkeypatch.setattr(
+        "app.api.generation_router.generate_story",
+        fake_generate,
+    )
+    client = TestClient(app)
+    response = client.post(
+        "/api/v1/stories/generate",
+        json={"text": "А" * 100, "language": "ru"},
+    )
+    assert response.status_code == 200
 
 
 def test_generate_story_rejects_missing_input() -> None:

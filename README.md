@@ -50,9 +50,9 @@ docker compose exec app python -m scrapers.cli seed
 docker compose exec app python -m scrapers.cli ingest-all
 ```
 
-Open http://localhost:8000 — browse corpus at `/`, generate stories at `/create`.
+Open http://localhost:8008 — comment on news at `/comment`, browse corpus at `/`.
 
-API docs: http://localhost:8000/docs
+API docs: http://localhost:8008/docs
 
 UI language toggle: **RU / EN** (top-right, persisted in cookie).
 
@@ -77,7 +77,7 @@ docker compose up db -d
 alembic upgrade head
 python -m scrapers.cli seed
 python -m scrapers.cli ingest-all
-uvicorn app.main:app --reload
+.\scripts\start_ui.ps1
 ```
 
 ## Ingest pipeline (priority order)
@@ -152,12 +152,23 @@ language). New sources attach as `SourceRef` on existing fragments.
 Semantic search uses **pgvector** + `fastembed`
 (`paraphrase-multilingual-MiniLM-L12-v2`, 384 dims).
 
-## Story generation
+## News commentary (RAG + LLM)
 
-Turn news into a short **parable**, **fairy tale**, **anecdote**, or **story**
-in the UI language (RU/EN toggle).
+Comment on news via **link or pasted text**. The app retrieves relevant corpus
+fragments (semantic match + style sampling), then generates an ironic cultural
+commentary. Optional formats: parable, fairy tale, anecdote, story.
 
-**UI:** http://localhost:8000/create
+**UI scripts (Windows):**
+
+```powershell
+.\scripts\start_ui.ps1      # http://127.0.0.1:8008/comment
+.\scripts\stop_ui.ps1
+.\scripts\restart_ui.ps1
+```
+
+Set `APP_HOST` / `APP_PORT` in `.env`. Logs: `.run/ui.log`.
+
+**UI:** http://localhost:8008/comment (legacy `/create` redirects here)
 
 **API:**
 
@@ -167,7 +178,7 @@ Content-Type: application/json
 
 {
   "text": "News text...",
-  "format": "parable",
+  "format": "comment",
   "language": "ru"
 }
 ```
@@ -200,7 +211,7 @@ improves with a larger corpus — run `ingest-all` first.
 Root: `E:\Python\GptEngineer\Scenarius`
 
 ```
-app/              FastAPI, models, pgvector, UI i18n, /create
+app/              FastAPI, models, pgvector, UI i18n, /comment
 scrapers/         citaty.info, Wikiquote, dedup, ingest
 data/canonical/   works.yaml, authors.yaml, must-haves
 data/sources.yaml ingest source registry
@@ -225,6 +236,7 @@ This machine may have several Postgres installs. Scenarius uses **`.env`**
 | Target | Port | pgvector |
 |--------|------|----------|
 | `docker` | 5435 | yes (recommended) |
+| `pg18` | 5434 | install via `scripts/install_pgvector.ps1` |
 | `pg16` | 5434 | install separately |
 | `pg17` | 5433 | install separately |
 | `pg15` | 5432 | no |
@@ -238,8 +250,22 @@ This machine may have several Postgres installs. Scenarius uses **`.env`**
 Set target in `.env`:
 
 ```env
-POSTGRES_TARGET=pg16
+POSTGRES_TARGET=pg18
 POSTGRES_PORT=5434
+```
+
+### pgvector on native PostgreSQL 18 (Windows)
+
+Migration `002` may skip `fragment_embeddings` if pgvector was missing at first
+run. After installing the extension:
+
+```powershell
+# Run PowerShell as Administrator
+.\scripts\install_pgvector.ps1 -PgMajor 18
+# As postgres superuser:
+psql -U postgres -h localhost -p 5434 -d scenarius -f scripts\setup_db_extensions.sql
+alembic upgrade head
+python -m scrapers.cli embed-all
 ```
 
 Or use Docker (pgvector included):

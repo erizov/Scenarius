@@ -44,9 +44,12 @@ class Settings(BaseSettings):
     scraper_delay_seconds: float = 1.0
     scraper_timeout_seconds: float = 120.0
 
+    app_host: str = "127.0.0.1"
+    app_port: int = 8008
+
     llm_provider: str = "auto"
     ollama_base_url: str = "http://localhost:11434"
-    ollama_model: str = "llama3.2"
+    ollama_model: str = "llama3.2:3b"
     openai_api_key: str = ""
     openai_model: str = "gpt-4o-mini"
     llm_max_tokens: int = 800

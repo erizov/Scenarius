@@ -15,9 +15,14 @@ from app.services.news import NewsContent, NewsInputError, resolve_news_input
 
 logger = structlog.get_logger()
 
-STORY_FORMATS = frozenset({"parable", "fairy_tale", "anecdote", "story"})
+STORY_FORMATS = frozenset({"comment", "parable", "fairy_tale", "anecdote", "story"})
 
 FORMAT_RETRIEVAL: dict[str, dict[str, Any]] = {
+    "comment": {
+        "sample_types": ["aphorism", "proverb", "quote"],
+        "work_kind": None,
+        "include_dialogues": True,
+    },
     "parable": {
         "sample_types": ["proverb", "aphorism"],
         "work_kind": "proverb_collection",
@@ -43,12 +48,14 @@ FORMAT_RETRIEVAL: dict[str, dict[str, Any]] = {
 
 FORMAT_LABELS = {
     "ru": {
+        "comment": "комментарий",
         "parable": "притча",
         "fairy_tale": "сказка",
         "anecdote": "анекдот",
         "story": "история",
     },
     "en": {
+        "comment": "commentary",
         "parable": "parable",
         "fairy_tale": "fairy tale",
         "anecdote": "anecdote",
@@ -146,6 +153,27 @@ def _build_prompt(
         corpus_lines.append(f"[{index}] ({source}) {item.text}")
 
     corpus_block = "\n".join(corpus_lines) if corpus_lines else "(no corpus matches)"
+
+    if story_format == "comment":
+        if language == "ru":
+            return (
+                "Напиши ироничный культурный комментарий к новости "
+                "(2–4 предложения).\n"
+                "Опирайся на тон и образы цитат корпуса, без дословного "
+                "копирования. Один острый вывод.\n\n"
+                f"Новость: {news.title}\n{news.body}\n\n"
+                f"Корпус:\n{corpus_block}\n\n"
+                "Ответ — только текст комментария, без заголовков."
+            )
+        return (
+            "Write an ironic cultural commentary on the news "
+            "(2–4 sentences).\n"
+            "Echo the tone of the corpus quotes without copying them "
+            "verbatim. One sharp takeaway.\n\n"
+            f"News: {news.title}\n{news.body}\n\n"
+            f"Corpus:\n{corpus_block}\n\n"
+            "Reply with only the commentary text, no headings."
+        )
 
     if language == "ru":
         return (

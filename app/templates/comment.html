@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="{{ ui_lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ app_name }} — {{ t.nav_comment }}</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+</head>
+<body>
+  <div class="page page-comment">
+    <header class="header header-minimal">
+      <div class="brand-row">
+        <div class="brand">
+          <h1>{{ app_name }}</h1>
+          <p class="subtitle">{{ t.comment_subtitle }}</p>
+        </div>
+        <div class="lang-toggle" aria-label="{{ t.ui_lang }}">
+          {% for code in supported_langs %}
+          <a
+            href="/set-lang?lang={{ code }}&next=/comment"
+            class="lang-btn {% if ui_lang == code %}active{% endif %}"
+          >{{ code | upper }}</a>
+          {% endfor %}
+        </div>
+      </div>
+
+      <nav class="nav-tabs">
+        <a href="/comment" class="nav-tab active">{{ t.nav_comment }}</a>
+        <a href="/" class="nav-tab">{{ t.nav_browse }}</a>
+      </nav>
+    </header>
+
+    <main>
+      <form
+        id="comment-form"
+        class="create-form comment-form"
+        hx-post="/api/v1/stories/generate"
+        hx-target="#story-result"
+        hx-swap="innerHTML"
+        hx-indicator="#generate-spinner"
+      >
+        <input type="hidden" name="language" value="{{ ui_lang }}">
+        <input type="hidden" name="format" value="comment" id="story-format">
+
+        <div class="segmented" role="tablist">
+          <button type="button" class="segment" data-mode="url">{{ t.input_mode_url }}</button>
+          <button type="button" class="segment active" data-mode="text">{{ t.input_mode_text }}</button>
+        </div>
+
+        <div class="field-group hidden" id="field-url">
+          <label for="news-url">{{ t.news_url_label }}</label>
+          <input
+            type="url"
+            id="news-url"
+            placeholder="{{ t.news_url_placeholder }}"
+            autocomplete="url"
+          >
+        </div>
+
+        <div class="field-group" id="field-text">
+          <label for="news-text">{{ t.news_text_label }}</label>
+          <textarea
+            id="news-text"
+            name="text"
+            rows="7"
+            placeholder="{{ t.news_text_placeholder }}"
+            minlength="80"
+          ></textarea>
+        </div>
+
+        <details class="format-advanced" open>
+          <summary>{{ t.advanced_formats }}</summary>
+          <div class="field-group">
+            <label for="format-select">{{ t.format_label }}</label>
+            <select id="format-select">
+              <option value="comment">{{ t.format_comment }}</option>
+              <option value="parable">{{ t.format_parable }}</option>
+              <option value="fairy_tale">{{ t.format_fairy_tale }}</option>
+              <option value="anecdote">{{ t.format_anecdote }}</option>
+              <option value="story">{{ t.format_story }}</option>
+            </select>
+          </div>
+        </details>
+
+        <button type="submit" class="primary-btn primary-btn-wide">
+          <span class="btn-label">{{ t.comment_button }}</span>
+          <span id="generate-spinner" class="htmx-indicator">{{ t.generating }}</span>
+        </button>
+      </form>
+
+      <div id="story-result" class="story-result">
+        {% include "partials/story_placeholder.html" %}
+      </div>
+    </main>
+
+    <footer class="footer footer-minimal">
+      <a href="/docs">{{ t.api_link }}</a>
+    </footer>
+  </div>
+
+  <script>
+    const MIN_TEXT = 80;
+    const segments = document.querySelectorAll(".segment");
+    const fieldUrl = document.getElementById("field-url");
+    const fieldText = document.getElementById("field-text");
+    const urlInput = document.getElementById("news-url");
+    const textInput = document.getElementById("news-text");
+    const formatHidden = document.getElementById("story-format");
+    const formatSelect = document.getElementById("format-select");
+    const storyResult = document.getElementById("story-result");
+    const form = document.getElementById("comment-form");
+    const loadingHtml = {{ t.generating | tojson }} + " — " + {{ t.loading_rag | tojson }};
+    const shortTextMsg = {{ t.error_client_short | tojson }};
+
+    function setInputMode(isUrl) {
+      fieldUrl.classList.toggle("hidden", !isUrl);
+      fieldText.classList.toggle("hidden", isUrl);
+      if (isUrl) {
+        textInput.removeAttribute("name");
+        urlInput.setAttribute("name", "url");
+      } else {
+        urlInput.removeAttribute("name");
+        textInput.setAttribute("name", "text");
+      }
+    }
+
+    segments.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        segments.forEach((item) => item.classList.remove("active"));
+        btn.classList.add("active");
+        setInputMode(btn.dataset.mode === "url");
+      });
+    });
+
+    formatSelect.addEventListener("change", () => {
+      formatHidden.value = formatSelect.value;
+    });
+    formatHidden.value = formatSelect.value;
+
+    form.addEventListener("submit", (event) => {
+      const isUrl = fieldUrl.classList.contains("hidden") === false;
+      if (!isUrl && textInput.value.trim().length < MIN_TEXT) {
+        event.preventDefault();
+        storyResult.innerHTML =
+          '<div class="story-error"><h3>{{ t.error_title }}</h3><p>'
+          + shortTextMsg + '</p></div>';
+        return;
+      }
+      if (isUrl && !urlInput.value.trim()) {
+        event.preventDefault();
+        storyResult.innerHTML =
+          '<div class="story-error"><h3>{{ t.error_title }}</h3><p>'
+          + {{ t.error_input_hint | tojson }} + '</p></div>';
+        return;
+      }
+    });
+
+    document.body.addEventListener("htmx:beforeRequest", (event) => {
+      if (event.detail.elt !== form) return;
+      storyResult.innerHTML =
+        '<div class="story-loading" role="status"><p>'
+        + loadingHtml + '</p></div>';
+    });
+
+    document.body.addEventListener("htmx:beforeSwap", (event) => {
+      if (event.detail.target !== storyResult) return;
+      if (event.detail.xhr.status >= 400) {
+        event.detail.shouldSwap = true;
+        event.detail.isError = false;
+      }
+    });
+
+    document.body.addEventListener("htmx:responseError", (event) => {
+      if (event.detail.target !== storyResult) return;
+      const xhr = event.detail.xhr;
+      if (xhr.responseText) {
+        storyResult.innerHTML = xhr.responseText;
+      }
+    });
+  </script>
+</body>
+</html>

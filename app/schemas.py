@@ -119,7 +119,8 @@ class StoryGenerateRequest(BaseModel):
     url: str | None = Field(default=None, max_length=2000)
     text: str | None = Field(default=None, max_length=4000)
     format: str = Field(
-        pattern="^(parable|fairy_tale|anecdote|story)$",
+        default="comment",
+        pattern="^(comment|parable|fairy_tale|anecdote|story)$",
     )
     language: str = Field(default="ru", pattern="^(ru|en)$")
 

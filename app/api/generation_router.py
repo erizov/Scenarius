@@ -11,7 +11,7 @@ from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 
 from app.db import get_db
-from app.i18n import ui_context
+from app.i18n import normalize_ui_lang, translate, ui_context
 from app.schemas import StoryCitationOut, StoryGenerateOut
 from app.services.generation import generate_story
 from app.services.llm import LLMUnavailableError
@@ -22,6 +22,19 @@ router = APIRouter(prefix="/api/v1", tags=["stories"])
 APP_DIR = Path(__file__).resolve().parents[1]
 templates = Jinja2Templates(directory=str(APP_DIR / "templates"))
 
+FORMAT_KEYS = {
+    "comment": "format_comment",
+    "parable": "format_parable",
+    "fairy_tale": "format_fairy_tale",
+    "anecdote": "format_anecdote",
+    "story": "format_story",
+}
+
+
+def _format_label(language: str, story_format: str) -> str:
+    key = FORMAT_KEYS.get(story_format, "format_comment")
+    return translate(language, key)
+
 
 def _parse_request_data(raw: dict[str, Any]) -> dict[str, Any]:
     url = raw.get("url")
@@ -29,7 +42,7 @@ def _parse_request_data(raw: dict[str, Any]) -> dict[str, Any]:
     return {
         "url": url.strip() if isinstance(url, str) and url.strip() else None,
         "text": text.strip() if isinstance(text, str) and text.strip() else None,
-        "format": raw.get("format", "story"),
+        "format": raw.get("format", "comment"),
         "language": raw.get("language", "ru"),
     }
 
@@ -95,6 +108,7 @@ async def generate_story_endpoint(
             name="partials/story_result.html",
             context={
                 "result": payload.model_dump(),
+                "format_label": _format_label(body.language, body.format),
                 **ctx,
             },
         )
